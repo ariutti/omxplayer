@@ -7,7 +7,7 @@
 
 using namespace std;
 
-/* Converts the action string from the config file into 
+/* Converts the action string from the config file into
  * the corresponding enum value
  */
 int convertStringToAction(string str_action)
@@ -62,7 +62,7 @@ int convertStringToAction(string str_action)
         return KeyConfig::ACTION_SHOW_SUBTITLES;
     if(str_action == "HIDE_SUBTITLES")
         return KeyConfig::ACTION_HIDE_SUBTITLES;
-            
+
     return -1;
 }
 /* Grabs the substring prior to the ':', this is the Action */
@@ -85,19 +85,66 @@ string getKeyFromString(string line)
     unsigned int colonIndex = line.find(":");
     if(colonIndex == string::npos)
         return "";
-    
+
     key = line.substr(colonIndex+1);
 
     return key;
 }
 
 /* Returns a keymap consisting of the default
- *  keybinds specified with the -k option 
+ *  keybinds specified with the -k option
  */
 map<int, int> KeyConfig::buildDefaultKeymap()
 {
     map<int,int> keymap;
 
+    /*
+    * Here I made some custom modification to the code
+    * in order to have numbers to select chapters;
+    */
+    //keymap['1'] = ACTION_DECREASE_SPEED;
+    //keymap['2'] = ACTION_INCREASE_SPEED;
+    keymap['<'] = ACTION_REWIND;
+    keymap[','] = ACTION_REWIND;
+    keymap['>'] = ACTION_FAST_FORWARD;
+    keymap['.'] = ACTION_FAST_FORWARD;
+    keymap['z'] = ACTION_SHOW_INFO;
+    keymap['j'] = ACTION_PREVIOUS_AUDIO;
+    keymap['k'] = ACTION_NEXT_AUDIO;
+    //keymap['i'] = ACTION_PREVIOUS_CHAPTER;
+    //keymap['o'] = ACTION_NEXT_CHAPTER;
+    keymap['n'] = ACTION_PREVIOUS_SUBTITLE;
+    keymap['m'] = ACTION_NEXT_SUBTITLE;
+    keymap['s'] = ACTION_TOGGLE_SUBTITLE;
+    keymap['d'] = ACTION_DECREASE_SUBTITLE_DELAY;
+    keymap['f'] = ACTION_INCREASE_SUBTITLE_DELAY;
+    keymap['q'] = ACTION_EXIT;
+    keymap[KEY_ESC] = ACTION_EXIT;
+    keymap['p'] = ACTION_PLAYPAUSE;
+    keymap[' '] = ACTION_PLAYPAUSE;
+    keymap['-'] = ACTION_DECREASE_VOLUME;
+    keymap['+'] = ACTION_INCREASE_VOLUME;
+    keymap['='] = ACTION_INCREASE_VOLUME;
+    keymap[KEY_LEFT] = ACTION_SEEK_BACK_SMALL;
+    keymap[KEY_RIGHT] = ACTION_SEEK_FORWARD_SMALL;
+    keymap[KEY_DOWN] = ACTION_SEEK_BACK_LARGE;
+    keymap[KEY_UP] = ACTION_SEEK_FORWARD_LARGE;
+    keymap['v'] = ACTION_STEP;
+    keymap['w'] = ACTION_SHOW_SUBTITLES;
+    keymap['x'] = ACTION_HIDE_SUBTITLES;
+
+    keymap['1'] = ACTION_CHAPTER_1;
+    keymap['2'] = ACTION_CHAPTER_2;
+    keymap['3'] = ACTION_CHAPTER_3;
+    keymap['4'] = ACTION_CHAPTER_4;
+    keymap['5'] = ACTION_CHAPTER_5;
+    keymap['6'] = ACTION_CHAPTER_6;
+    keymap['7'] = ACTION_CHAPTER_7;
+    keymap['8'] = ACTION_CHAPTER_8;
+    keymap['9'] = ACTION_CHAPTER_9;
+    keymap['0'] = ACTION_CHAPTER_10;
+
+    /*
     keymap['1'] = ACTION_DECREASE_SPEED;
     keymap['2'] = ACTION_INCREASE_SPEED;
     keymap['<'] = ACTION_REWIND;
@@ -128,6 +175,7 @@ map<int, int> KeyConfig::buildDefaultKeymap()
     keymap['v'] = ACTION_STEP;
     keymap['w'] = ACTION_SHOW_SUBTITLES;
     keymap['x'] = ACTION_HIDE_SUBTITLES;
+    */
 
     return keymap;
 }

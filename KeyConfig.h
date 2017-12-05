@@ -4,8 +4,8 @@
 class KeyConfig
 {
 
-  public: 
-    enum 
+  public:
+    enum
     {
         ACTION_DECREASE_SPEED = 1,
         ACTION_INCREASE_SPEED = 2,
@@ -43,6 +43,18 @@ class KeyConfig
         ACTION_CROP_VIDEO = 34,
         ACTION_PAUSE = 35,
         ACTION_PLAY = 36,
+        
+        ACTION_CHAPTER_1 = 37,
+        ACTION_CHAPTER_2 = 38,
+        ACTION_CHAPTER_3 = 39,
+        ACTION_CHAPTER_4 = 40,
+        ACTION_CHAPTER_5 = 41,
+        ACTION_CHAPTER_6 = 42,
+        ACTION_CHAPTER_7 = 43,
+        ACTION_CHAPTER_8 = 44,
+        ACTION_CHAPTER_9 = 45,
+        ACTION_CHAPTER_10 = 46
+
     };
 
     #define KEY_LEFT 0x5b44

@@ -1204,6 +1204,8 @@ int main(int argc, char *argv[])
         m_tv_show_info = !m_tv_show_info;
         vc_tv_show_info(m_tv_show_info);
         break;
+
+      /*
       case KeyConfig::ACTION_DECREASE_SPEED:
         if (playspeed_current < playspeed_slow_min || playspeed_current > playspeed_slow_max)
           playspeed_current = playspeed_slow_max-1;
@@ -1214,6 +1216,7 @@ int main(int argc, char *argv[])
         printf("Playspeed %.3f\n", playspeeds[playspeed_current]/1000.0f);
         m_Pause = false;
         break;
+
       case KeyConfig::ACTION_INCREASE_SPEED:
         if (playspeed_current < playspeed_slow_min || playspeed_current > playspeed_slow_max)
           playspeed_current = playspeed_slow_max-1;
@@ -1224,6 +1227,8 @@ int main(int argc, char *argv[])
         printf("Playspeed %.3f\n", playspeeds[playspeed_current]/1000.0f);
         m_Pause = false;
         break;
+
+      */
       case KeyConfig::ACTION_REWIND:
         if (playspeed_current >= playspeed_ff_min && playspeed_current <= playspeed_ff_max)
         {
@@ -1288,12 +1293,15 @@ int main(int argc, char *argv[])
             strprintf("Audio stream: %d", m_omx_reader.GetAudioIndex() + 1));
         }
         break;
+
+      // I comment out these lines
+      /*
       case KeyConfig::ACTION_PREVIOUS_CHAPTER:
         if(m_omx_reader.GetChapterCount() > 0)
         {
           m_omx_reader.SeekChapter(m_omx_reader.GetChapter() - 1, &startpts);
-          //DISPLAY_TEXT_LONG(strprintf("Chapter %d", m_omx_reader.GetChapter()));
-          DISPLAY_TEXT_LONG(strprintf("ciao %d", m_omx_reader.GetChapter()));
+          DISPLAY_TEXT_LONG(strprintf("Chapter %d", m_omx_reader.GetChapter()));
+          //DISPLAY_TEXT_LONG(strprintf("ciao %d", m_omx_reader.GetChapter()));
           //DISPLAY_TEXT_LONG( strprintf("prova prova") );
           FlushStreams(startpts);
           m_seek_flush = true;
@@ -1304,6 +1312,8 @@ int main(int argc, char *argv[])
           m_incr = -600.0;
         }
         break;
+
+
       case KeyConfig::ACTION_NEXT_CHAPTER:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1318,6 +1328,7 @@ int main(int argc, char *argv[])
           m_incr = 600.0;
         }
         break;
+      */
       case KeyConfig::ACTION_PREVIOUS_SUBTITLE:
         if(m_has_subtitle)
         {
@@ -1523,6 +1534,120 @@ int main(int argc, char *argv[])
           m_Volume / 100.0f));
         printf("Current Volume: %.2fdB\n", m_Volume / 100.0f);
         break;
+
+      // I add the following line in order to select individual chapters
+
+      case KeyConfig::ACTION_CHAPTER_1:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(1, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 1 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+
+      case KeyConfig::ACTION_CHAPTER_2:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(2, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 2 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+
+      case KeyConfig::ACTION_CHAPTER_3:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(3, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 3 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+
+      case KeyConfig::ACTION_CHAPTER_4:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(4, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 4 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+      //a
+      case KeyConfig::ACTION_CHAPTER_5:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(5, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 5 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+      //a
+      case KeyConfig::ACTION_CHAPTER_6:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(6, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 6 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+      //a
+      case KeyConfig::ACTION_CHAPTER_7:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(7, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 7 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+      //a
+      case KeyConfig::ACTION_CHAPTER_8:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(8, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 8 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+      //a
+      case KeyConfig::ACTION_CHAPTER_9:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(9, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 9 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+      //a
+      case KeyConfig::ACTION_CHAPTER_10:
+        if(m_omx_reader.GetChapterCount() > 0)
+        {
+          m_omx_reader.SeekChapter(10, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 10 ));
+          FlushStreams(startpts);
+          m_seek_flush = true;
+          m_chapter_seek = true;
+        }
+        break;
+      //a
+
       default:
         break;
     }
