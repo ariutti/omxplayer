@@ -1293,7 +1293,8 @@ int main(int argc, char *argv[])
         {
           m_omx_reader.SeekChapter(m_omx_reader.GetChapter() - 1, &startpts);
           //DISPLAY_TEXT_LONG(strprintf("Chapter %d", m_omx_reader.GetChapter()));
-          DISPLAY_TEXT_LONG( strprintf("prova prova") );
+          DISPLAY_TEXT_LONG(strprintf("ciao %d", m_omx_reader.GetChapter()));
+          //DISPLAY_TEXT_LONG( strprintf("prova prova") );
           FlushStreams(startpts);
           m_seek_flush = true;
           m_chapter_seek = true;
