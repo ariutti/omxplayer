@@ -496,9 +496,9 @@ static void blank_background(uint32_t rgba)
 // Nicola: this is a convinence function to print the status of
 // different varaibles used by the program.
 void debugprint( bool _stop, bool _loop, bool _chapter_seek, bool _seek_flush, bool _sentStarted, bool _send_eos ) {
-  printf("stop\tloop\tch_seek\tskflush\tsntStrt\tsend_eos");
+  printf("\tstop\tloop\tch_seek\tskflush\tsntStrt\tsend_eos");
   printf("\n");
-  printf("%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _chapter_seek, _seek_flush, _sentStarted, _send_eos );
+  printf("\t%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _chapter_seek, _seek_flush, _sentStarted, _send_eos );
   printf("\n\n");
 }
 
@@ -1564,7 +1564,7 @@ int main(int argc, char *argv[])
           // we move along the movie via chapter selection.
           m_seek_flush = true;
           m_chapter_seek = true;
-          printf("DEBUG: Key pressed: chapter 1 selected");
+          printf("DEBUG: Key pressed: chapter 1 selected\n");
         }
         break;
       /*
@@ -1664,7 +1664,7 @@ int main(int argc, char *argv[])
           FlushStreams(startpts);
           m_seek_flush = true;
           m_chapter_seek = true;
-          printf("DEBUG: Key pressed: chapter 10 selected");
+          printf("DEBUG: Key pressed: chapter 10 selected\n");
         }
         break;
 
