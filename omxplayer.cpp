@@ -2027,7 +2027,7 @@ do_exit:
 
 // Nicola: this is a convinence function to print the status of
 // different varaibles used by the program.
-void debugprint( _stop, _loop, _chapter_seek, _seek_flush, _sendStarted, _send_eos ) {
+void debugprint( bool _stop, bool _loop, bool _chapter_seek, bool _seek_flush, bool _sendStarted, bool _send_eos ) {
   printf("stop\tloop\tch_seek\tseek_flush\tsentStarted\tsend_eos");
   printf("\n");
   printf("%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _chapter_seek, _seek_flush, _sentStarted, _send_eos );
