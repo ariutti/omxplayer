@@ -1666,7 +1666,7 @@ int main(int argc, char *argv[])
 
     if( m_seek_flush || m_incr != 0 )
     {
-      printf("DEBUG: inside m_seek_flush or m_incr != 0");
+      printf("DEBUG: inside m_seek_flush or m_incr != 0\n");
       double seek_pos     = 0;
       double pts          = 0;
 
@@ -1675,7 +1675,7 @@ int main(int argc, char *argv[])
 
       if (!m_chapter_seek)
       {
-        printf("DEBUG: m_chapter_seek");
+        printf("DEBUG: m_chapter_seek\n");
         pts = m_av_clock->OMXMediaTime();
 
         seek_pos = (pts ? pts / DVD_TIME_BASE : last_seek_pos) + m_incr;
@@ -1685,7 +1685,7 @@ int main(int argc, char *argv[])
 
         if(m_omx_reader.SeekTime((int)seek_pos, m_incr < 0.0f, &startpts))
         {
-          printf("DEBUG: m_omx_reader");
+          printf("DEBUG: m_omx_reader\n");
           unsigned t = (unsigned)(startpts*1e-6);
           auto dur = m_omx_reader.GetStreamLength() / 1000;
           DISPLAY_TEXT_LONG(strprintf("Seek\n%02d:%02d:%02d / %02d:%02d:%02d",
@@ -1698,13 +1698,13 @@ int main(int argc, char *argv[])
       sentStarted = false;
 
       if (m_omx_reader.IsEof()) {
-        printf("DEBUG: EOF - goto - spaghetti");
+        printf("DEBUG: EOF - goto - spaghetti\n");
         goto do_exit;
       }
 
       // Quick reset to reduce delay during loop & seek.
       if (m_has_video && !m_player_video.Reset()) {
-        printf("DEBUG: has_video + Reset");
+        printf("DEBUG: has_video + Reset\n");
         goto do_exit;
       }
 
@@ -1720,7 +1720,7 @@ int main(int argc, char *argv[])
     }
     else if(m_packet_after_seek && TRICKPLAY(m_av_clock->OMXPlaySpeed()))
     {
-      printf("DEBUG: m_packet_after_seek");
+      printf("DEBUG: m_packet_after_seek\n");
       double seek_pos     = 0;
       double pts          = 0;
 
