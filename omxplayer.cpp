@@ -1198,7 +1198,10 @@ int main(int argc, char *argv[])
                                : m_omxcontrol.getEvent();
        double oldPos, newPos;
 
-    switch(result.getKey())
+    // Nicola: a debug print
+    printf("DEBUG: I'm inside while(!m_Stop) line 1182\n"); debugprint();
+
+    switch( result.getKey() )
     {
       case KeyConfig::ACTION_SHOW_INFO:
         m_tv_show_info = !m_tv_show_info;
@@ -1549,8 +1552,8 @@ int main(int argc, char *argv[])
           // Nicola: I comment the following line (the same for all the other chapters)
           // in order to keep the loop option working even if
           // we move along the movie via chapter selection.
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1560,19 +1563,19 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(2, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 2 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
-
+/*
       case KeyConfig::ACTION_CHAPTER_3:
         if(m_omx_reader.GetChapterCount() > 0)
         {
           m_omx_reader.SeekChapter(3, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 3 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1582,8 +1585,8 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(4, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 4 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1593,8 +1596,8 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(5, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 5 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1604,8 +1607,8 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(6, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 6 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1615,8 +1618,8 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(7, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 7 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1626,8 +1629,8 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(8, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 8 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1637,8 +1640,8 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(9, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 9 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
 
@@ -1648,11 +1651,11 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(10, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 10 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
-          //m_chapter_seek = true;
+          m_seek_flush = true;
+          m_chapter_seek = true;
         }
         break;
-
+*/
       default:
         break;
     }
@@ -1666,7 +1669,7 @@ int main(int argc, char *argv[])
 
     if( m_seek_flush || m_incr != 0 )
     {
-      printf("DEBUG: A\n");
+      printf("DEBUG: A\n"); debugprint();
       double seek_pos     = 0;
       double pts          = 0;
 
@@ -1675,7 +1678,7 @@ int main(int argc, char *argv[])
 
       if (!m_chapter_seek)
       {
-        printf("DEBUG: B\n");
+        printf("DEBUG: B\n"); debugprint();
         pts = m_av_clock->OMXMediaTime();
 
         seek_pos = (pts ? pts / DVD_TIME_BASE : last_seek_pos) + m_incr;
@@ -1685,7 +1688,7 @@ int main(int argc, char *argv[])
 
         if(m_omx_reader.SeekTime((int)seek_pos, m_incr < 0.0f, &startpts))
         {
-          printf("DEBUG: C\n");
+          printf("DEBUG: C\n"); debugprint();
           unsigned t = (unsigned)(startpts*1e-6);
           auto dur = m_omx_reader.GetStreamLength() / 1000;
           DISPLAY_TEXT_LONG(strprintf("Seek\n%02d:%02d:%02d / %02d:%02d:%02d",
@@ -1698,13 +1701,13 @@ int main(int argc, char *argv[])
       sentStarted = false;
 
       if (m_omx_reader.IsEof()) {
-        printf("DEBUG: D\n");
+        printf("DEBUG: D\n"); debugprint();
         goto do_exit;
       }
 
       // Quick reset to reduce delay during loop & seek.
       if (m_has_video && !m_player_video.Reset()) {
-        printf("DEBUG: E\n");
+        printf("DEBUG: E\n"); debugprint();
         goto do_exit;
       }
 
@@ -1720,7 +1723,7 @@ int main(int argc, char *argv[])
     }
     else if(m_packet_after_seek && TRICKPLAY(m_av_clock->OMXPlaySpeed()))
     {
-      printf("DEBUG: F\n");
+      printf("DEBUG: F\n"); debugprint();
       double seek_pos     = 0;
       double pts          = 0;
 
@@ -2018,4 +2021,14 @@ do_exit:
     return 3;
   // exit status failure on other cases
   return EXIT_FAILURE;
+}
+
+
+// Nicola: this is a convinence function to print the status of
+// different varaibles used by the program.
+void debugprint() {
+  printf("stop\tloop\tch_seek\tseek_flush\tsentStarted");
+  printf("\n")
+  printf("%d\t%d\t%d\t%d\t%d", m_stop, m_loop, m_chapter_seek, m_seek_flush, sentStarted);
+  printf("\n\n");
 }
