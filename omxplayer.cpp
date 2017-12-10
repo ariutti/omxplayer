@@ -493,6 +493,7 @@ static void blank_background(uint32_t rgba)
   assert( ret == 0 );
 }
 
+
 int main(int argc, char *argv[])
 {
   signal(SIGSEGV, sig_handler);
@@ -1199,7 +1200,7 @@ int main(int argc, char *argv[])
        double oldPos, newPos;
 
     // Nicola: a debug print
-    printf("DEBUG: I'm inside while(!m_Stop) line 1182\n"); debugprint();
+    printf("DEBUG: I'm inside while(!m_Stop) line 1182\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sendStarted, m_send_eos );
 
     switch( result.getKey() )
     {
@@ -1669,7 +1670,7 @@ int main(int argc, char *argv[])
 
     if( m_seek_flush || m_incr != 0 )
     {
-      printf("DEBUG: A\n"); debugprint();
+      printf("DEBUG: A\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sendStarted, m_send_eos );
       double seek_pos     = 0;
       double pts          = 0;
 
@@ -1678,7 +1679,7 @@ int main(int argc, char *argv[])
 
       if (!m_chapter_seek)
       {
-        printf("DEBUG: B\n"); debugprint();
+        printf("DEBUG: B\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sendStarted, m_send_eos );
         pts = m_av_clock->OMXMediaTime();
 
         seek_pos = (pts ? pts / DVD_TIME_BASE : last_seek_pos) + m_incr;
@@ -1688,7 +1689,7 @@ int main(int argc, char *argv[])
 
         if(m_omx_reader.SeekTime((int)seek_pos, m_incr < 0.0f, &startpts))
         {
-          printf("DEBUG: C\n"); debugprint();
+          printf("DEBUG: C\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sendStarted, m_send_eos );
           unsigned t = (unsigned)(startpts*1e-6);
           auto dur = m_omx_reader.GetStreamLength() / 1000;
           DISPLAY_TEXT_LONG(strprintf("Seek\n%02d:%02d:%02d / %02d:%02d:%02d",
@@ -1701,13 +1702,13 @@ int main(int argc, char *argv[])
       sentStarted = false;
 
       if (m_omx_reader.IsEof()) {
-        printf("DEBUG: D\n"); debugprint();
+        printf("DEBUG: D\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sendStarted, m_send_eos );
         goto do_exit;
       }
 
       // Quick reset to reduce delay during loop & seek.
       if (m_has_video && !m_player_video.Reset()) {
-        printf("DEBUG: E\n"); debugprint();
+        printf("DEBUG: E\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sendStarted, m_send_eos );
         goto do_exit;
       }
 
@@ -1723,7 +1724,7 @@ int main(int argc, char *argv[])
     }
     else if(m_packet_after_seek && TRICKPLAY(m_av_clock->OMXPlaySpeed()))
     {
-      printf("DEBUG: F\n"); debugprint();
+      printf("DEBUG: F\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sendStarted, m_send_eos );
       double seek_pos     = 0;
       double pts          = 0;
 
@@ -2026,9 +2027,9 @@ do_exit:
 
 // Nicola: this is a convinence function to print the status of
 // different varaibles used by the program.
-void debugprint() {
-  printf("stop\tloop\tch_seek\tseek_flush\tsentStarted");
+void debugprint( _stop, _loop, _chapter_seek, _seek_flush, _sendStarted, _send_eos ) {
+  printf("stop\tloop\tch_seek\tseek_flush\tsentStarted\tsend_eos");
   printf("\n");
-  printf("%d\t%d\t%d\t%d\t%d", m_stop, m_loop, m_chapter_seek, m_seek_flush, sentStarted);
+  printf("%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _chapter_seek, _seek_flush, _sentStarted, _send_eos );
   printf("\n\n");
 }
