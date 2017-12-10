@@ -2028,7 +2028,7 @@ do_exit:
 // different varaibles used by the program.
 void debugprint() {
   printf("stop\tloop\tch_seek\tseek_flush\tsentStarted");
-  printf("\n")
+  printf("\n");
   printf("%d\t%d\t%d\t%d\t%d", m_stop, m_loop, m_chapter_seek, m_seek_flush, sentStarted);
   printf("\n\n");
 }
