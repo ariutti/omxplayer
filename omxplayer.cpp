@@ -1559,7 +1559,7 @@ int main(int argc, char *argv[])
         {
           m_omx_reader.SeekChapter(1, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 1 ));
-          FlushStreams(startpts);
+          //FlushStreams(startpts);
           m_seek_flush = true;
           // Nicola: workaround #1
           // I comment the following line (the same for all the other chapters)
@@ -1664,7 +1664,7 @@ int main(int argc, char *argv[])
         {
           m_omx_reader.SeekChapter(10, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 10 ));
-          FlushStreams(startpts);
+          //FlushStreams(startpts);
           m_seek_flush = true;
           // Nicola: workaround #1
           //m_chapter_seek = true;
