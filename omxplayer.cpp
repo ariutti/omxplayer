@@ -495,7 +495,7 @@ static void blank_background(uint32_t rgba)
 
 // Nicola: this is a convinence function to print the status of
 // different varaibles used by the program.
-void debugprint( OMXReader* r, bool _stop, bool _loop, bool _update, bool _chapter_seek, bool _seek_flush, bool _sentStarted, bool _omx_pkt, bool _pas, bool _send_eos ) {
+void debugprint( OMXReader &r, bool _stop, bool _loop, bool _update, bool _chapter_seek, bool _seek_flush, bool _sentStarted, bool _omx_pkt, bool _pas, bool _send_eos ) {
   //printf("\tstop\tloop\tupdate\tch_seek\tskflush\tsntStrt\tomx_pkt\tpas\tsend_eos");
   //printf("\n");
   //printf("\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _update, _chapter_seek, _seek_flush, _sentStarted, _omx_pkt, _pas, _send_eos );
