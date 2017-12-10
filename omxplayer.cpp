@@ -1549,7 +1549,7 @@ int main(int argc, char *argv[])
           // Nicola: I comment the following line (the same for all the other chapters)
           // in order to keep the loop option working even if
           // we move along the movie via chapter selection.
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1560,7 +1560,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(2, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 2 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1571,7 +1571,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(3, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 3 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1582,7 +1582,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(4, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 4 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1593,7 +1593,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(5, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 5 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1604,7 +1604,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(6, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 6 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1615,7 +1615,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(7, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 7 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1626,7 +1626,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(8, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 8 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1637,7 +1637,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(9, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 9 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1648,7 +1648,7 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(10, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 10 ));
           FlushStreams(startpts);
-          //m_seek_flush = true;
+          m_seek_flush = true;
           m_chapter_seek = true;
         }
         break;
@@ -1666,6 +1666,7 @@ int main(int argc, char *argv[])
 
     if( m_seek_flush || m_incr != 0 )
     {
+      printf("DEBUG: inside m_seek_flush or m_incr != 0");
       double seek_pos     = 0;
       double pts          = 0;
 
@@ -1674,6 +1675,7 @@ int main(int argc, char *argv[])
 
       if (!m_chapter_seek)
       {
+        printf("DEBUG: m_chapter_seek");
         pts = m_av_clock->OMXMediaTime();
 
         seek_pos = (pts ? pts / DVD_TIME_BASE : last_seek_pos) + m_incr;
@@ -1683,6 +1685,7 @@ int main(int argc, char *argv[])
 
         if(m_omx_reader.SeekTime((int)seek_pos, m_incr < 0.0f, &startpts))
         {
+          printf("DEBUG: m_omx_reader");
           unsigned t = (unsigned)(startpts*1e-6);
           auto dur = m_omx_reader.GetStreamLength() / 1000;
           DISPLAY_TEXT_LONG(strprintf("Seek\n%02d:%02d:%02d / %02d:%02d:%02d",
@@ -1694,12 +1697,16 @@ int main(int argc, char *argv[])
 
       sentStarted = false;
 
-      if (m_omx_reader.IsEof())
+      if (m_omx_reader.IsEof()) {
+        printf("DEBUG: EOF - goto - spaghetti");
         goto do_exit;
+      }
 
       // Quick reset to reduce delay during loop & seek.
-      if (m_has_video && !m_player_video.Reset())
+      if (m_has_video && !m_player_video.Reset()) {
+        printf("DEBUG: has_video + Reset");
         goto do_exit;
+      }
 
       CLog::Log(LOGDEBUG, "Seeked %.0f %.0f %.0f\n", DVD_MSEC_TO_TIME(seek_pos), startpts, m_av_clock->OMXMediaTime());
 
@@ -1713,6 +1720,7 @@ int main(int argc, char *argv[])
     }
     else if(m_packet_after_seek && TRICKPLAY(m_av_clock->OMXPlaySpeed()))
     {
+      printf("DEBUG: m_packet_after_seek");
       double seek_pos     = 0;
       double pts          = 0;
 
