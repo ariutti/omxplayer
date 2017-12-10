@@ -496,7 +496,7 @@ static void blank_background(uint32_t rgba)
 // Nicola: this is a convinence function to print the status of
 // different varaibles used by the program.
 void debugprint( bool _stop, bool _loop, bool _chapter_seek, bool _seek_flush, bool _sentStarted, bool _send_eos ) {
-  printf("stop\tloop\tch_seek\tseek_flush\tsentStarted\tsend_eos");
+  printf("stop\tloop\tch_seek\tskflush\tsntStrt\tsend_eos");
   printf("\n");
   printf("%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _chapter_seek, _seek_flush, _sentStarted, _send_eos );
   printf("\n\n");
@@ -1208,7 +1208,8 @@ int main(int argc, char *argv[])
        double oldPos, newPos;
 
     // Nicola: a debug print
-    printf("DEBUG: I'm inside while(!m_Stop) line 1182\n"); debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sentStarted, m_send_eos );
+    //printf("DEBUG: I'm inside while(!m_top) line 1182\n");
+    //debugprint( m_stop, m_loop, m_chapter_seek, m_seek_flush, sentStarted, m_send_eos );
 
     switch( result.getKey() )
     {
@@ -1563,9 +1564,10 @@ int main(int argc, char *argv[])
           // we move along the movie via chapter selection.
           m_seek_flush = true;
           m_chapter_seek = true;
+          printf("DEBUG: Key pressed: chapter 1 selected");
         }
         break;
-
+      /*
       case KeyConfig::ACTION_CHAPTER_2:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1576,7 +1578,7 @@ int main(int argc, char *argv[])
           m_chapter_seek = true;
         }
         break;
-/*
+
       case KeyConfig::ACTION_CHAPTER_3:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1653,7 +1655,7 @@ int main(int argc, char *argv[])
           m_chapter_seek = true;
         }
         break;
-
+  */
       case KeyConfig::ACTION_CHAPTER_10:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1662,9 +1664,10 @@ int main(int argc, char *argv[])
           FlushStreams(startpts);
           m_seek_flush = true;
           m_chapter_seek = true;
+          printf("DEBUG: Key pressed: chapter 10 selected");
         }
         break;
-*/
+
       default:
         break;
     }
