@@ -493,6 +493,14 @@ static void blank_background(uint32_t rgba)
   assert( ret == 0 );
 }
 
+// Nicola: this is a convinence function to print the status of
+// different varaibles used by the program.
+void debugprint( bool _stop, bool _loop, bool _chapter_seek, bool _seek_flush, bool _sendStarted, bool _send_eos ) {
+  printf("stop\tloop\tch_seek\tseek_flush\tsentStarted\tsend_eos");
+  printf("\n");
+  printf("%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _chapter_seek, _seek_flush, _sentStarted, _send_eos );
+  printf("\n\n");
+}
 
 int main(int argc, char *argv[])
 {
@@ -2022,14 +2030,4 @@ do_exit:
     return 3;
   // exit status failure on other cases
   return EXIT_FAILURE;
-}
-
-
-// Nicola: this is a convinence function to print the status of
-// different varaibles used by the program.
-void debugprint( bool _stop, bool _loop, bool _chapter_seek, bool _seek_flush, bool _sendStarted, bool _send_eos ) {
-  printf("stop\tloop\tch_seek\tseek_flush\tsentStarted\tsend_eos");
-  printf("\n");
-  printf("%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _chapter_seek, _seek_flush, _sentStarted, _send_eos );
-  printf("\n\n");
 }
