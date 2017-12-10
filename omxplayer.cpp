@@ -1205,6 +1205,7 @@ int main(int argc, char *argv[])
         vc_tv_show_info(m_tv_show_info);
         break;
 
+      // Nicola: I've commented out hose lines. I don't need these options.
       /*
       case KeyConfig::ACTION_DECREASE_SPEED:
         if (playspeed_current < playspeed_slow_min || playspeed_current > playspeed_slow_max)
@@ -1227,8 +1228,8 @@ int main(int argc, char *argv[])
         printf("Playspeed %.3f\n", playspeeds[playspeed_current]/1000.0f);
         m_Pause = false;
         break;
-
       */
+
       case KeyConfig::ACTION_REWIND:
         if (playspeed_current >= playspeed_ff_min && playspeed_current <= playspeed_ff_max)
         {
@@ -1294,7 +1295,7 @@ int main(int argc, char *argv[])
         }
         break;
 
-      // I comment out these lines
+      // Nicola: I comment out these lines
       /*
       case KeyConfig::ACTION_PREVIOUS_CHAPTER:
         if(m_omx_reader.GetChapterCount() > 0)
@@ -1313,7 +1314,6 @@ int main(int argc, char *argv[])
         }
         break;
 
-
       case KeyConfig::ACTION_NEXT_CHAPTER:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1329,6 +1329,7 @@ int main(int argc, char *argv[])
         }
         break;
       */
+
       case KeyConfig::ACTION_PREVIOUS_SUBTITLE:
         if(m_has_subtitle)
         {
@@ -1460,6 +1461,7 @@ int main(int argc, char *argv[])
           m_player_subtitles.Pause();
         }
         break;
+
       case KeyConfig::ACTION_PLAYPAUSE:
         m_Pause = !m_Pause;
         if (m_av_clock->OMXPlaySpeed() != DVD_PLAYSPEED_NORMAL && m_av_clock->OMXPlaySpeed() != DVD_PLAYSPEED_PAUSE)
@@ -1490,6 +1492,7 @@ int main(int argc, char *argv[])
             (t/3600), (t/60)%60, t%60, (dur/3600), (dur/60)%60, dur%60));
         }
         break;
+
       case KeyConfig::ACTION_MOVE_VIDEO:
         sscanf(result.getWinArg(), "%f %f %f %f", &m_config_video.dst_rect.x1, &m_config_video.dst_rect.y1, &m_config_video.dst_rect.x2, &m_config_video.dst_rect.y2);
         m_player_video.SetVideoRect(m_config_video.src_rect, m_config_video.dst_rect);
@@ -1535,7 +1538,7 @@ int main(int argc, char *argv[])
         printf("Current Volume: %.2fdB\n", m_Volume / 100.0f);
         break;
 
-      // I add the following line in order to select individual chapters
+      // Nicola: I add the following line in order to select individual chapters
 
       case KeyConfig::ACTION_CHAPTER_1:
         if(m_omx_reader.GetChapterCount() > 0)
@@ -1544,7 +1547,10 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 1 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          // Nicola: I comment the following line (the same for all the other chapters)
+          // in order to keep the loop option working even if
+          // we move along the movie via chapter selection.
+          //m_chapter_seek = true;
         }
         break;
 
@@ -1555,7 +1561,7 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 2 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
 
@@ -1566,7 +1572,7 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 3 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
 
@@ -1577,10 +1583,10 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 4 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
-      //a
+
       case KeyConfig::ACTION_CHAPTER_5:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1588,10 +1594,10 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 5 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
-      //a
+
       case KeyConfig::ACTION_CHAPTER_6:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1599,10 +1605,10 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 6 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
-      //a
+
       case KeyConfig::ACTION_CHAPTER_7:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1610,10 +1616,10 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 7 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
-      //a
+
       case KeyConfig::ACTION_CHAPTER_8:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1621,10 +1627,10 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 8 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
-      //a
+
       case KeyConfig::ACTION_CHAPTER_9:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1632,10 +1638,10 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 9 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
-      //a
+
       case KeyConfig::ACTION_CHAPTER_10:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1643,10 +1649,9 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 10 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
         }
         break;
-      //a
 
       default:
         break;
@@ -1659,7 +1664,7 @@ int main(int argc, char *argv[])
       continue;
     }
 
-    if(m_seek_flush || m_incr != 0)
+    if( m_seek_flush || m_incr != 0 )
     {
       double seek_pos     = 0;
       double pts          = 0;
