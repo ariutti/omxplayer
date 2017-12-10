@@ -1936,10 +1936,18 @@ int main(int argc, char *argv[])
       if (m_loop)
       {
         m_incr = m_loop_from - (m_av_clock->OMXMediaTime() ? m_av_clock->OMXMediaTime() / DVD_TIME_BASE : last_seek_pos);
+        printf("DEBUG: before continue\n");
+        debugprint( m_stop, m_loop, update, m_chapter_seek, m_seek_flush, sentStarted, m_omx_pkt, m_packet_after_seek, m_send_eos );
         continue;
+        printf("DEBUG: after continue\n");
+        debugprint( m_stop, m_loop, update, m_chapter_seek, m_seek_flush, sentStarted, m_omx_pkt, m_packet_after_seek, m_send_eos );
       }
 
+      printf("DEBUG: before break\n");
+      debugprint( m_stop, m_loop, update, m_chapter_seek, m_seek_flush, sentStarted, m_omx_pkt, m_packet_after_seek, m_send_eos );
       break;
+      printf("DEBUG: after break\n");
+      debugprint( m_stop, m_loop, update, m_chapter_seek, m_seek_flush, sentStarted, m_omx_pkt, m_packet_after_seek, m_send_eos );
     }
 
     if(m_has_video && m_omx_pkt && m_omx_reader.IsActive(OMXSTREAM_VIDEO, m_omx_pkt->stream_index))
