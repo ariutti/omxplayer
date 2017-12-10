@@ -495,7 +495,8 @@ static void blank_background(uint32_t rgba)
 
 // Nicola: this is a convinence function to print the status of
 // different varaibles used by the program.
-void debugprint( OMXReader &r, bool _stop, bool _loop, bool _update, bool _chapter_seek, bool _seek_flush, bool _sentStarted, bool _omx_pkt, bool _pas, bool _send_eos ) {
+void debugprint( OMXReader &r, bool _stop, bool _loop, bool _update, bool _chapter_seek,
+                 bool _seek_flush, bool _sentStarted, bool _omx_pkt, bool _pas, bool _send_eos ) {
   //printf("\tstop\tloop\tupdate\tch_seek\tskflush\tsntStrt\tomx_pkt\tpas\tsend_eos");
   //printf("\n");
   //printf("\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d", _stop, _loop, _update, _chapter_seek, _seek_flush, _sentStarted, _omx_pkt, _pas, _send_eos );
@@ -1210,9 +1211,6 @@ int main(int argc, char *argv[])
                                : m_omxcontrol.getEvent();
        double oldPos, newPos;
 
-    // Nicola: a debug print
-    //printf("DEBUG: I'm inside while(!m_top) line 1182\n");
-    //debugprint( m_omx_reader, m_stop, m_loop, update, m_chapter_seek, m_seek_flush, sentStarted, m_omx_pkt, m_packet_after_seek, m_send_eos );
 
     switch( result.getKey() )
     {
@@ -1562,11 +1560,12 @@ int main(int argc, char *argv[])
           m_omx_reader.SeekChapter(1, &startpts);
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 1 ));
           FlushStreams(startpts);
-          // Nicola: I comment the following line (the same for all the other chapters)
+          m_seek_flush = true;
+          // Nicola: workaround #1
+          // I comment the following line (the same for all the other chapters)
           // in order to keep the loop option working even if
           // we move along the movie via chapter selection.
-          m_seek_flush = true;
-          m_chapter_seek = true;
+          //m_chapter_seek = true;
           printf("DEBUG: Key pressed: chapter 1 selected\n");
         }
         break;
@@ -1667,7 +1666,8 @@ int main(int argc, char *argv[])
           DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 10 ));
           FlushStreams(startpts);
           m_seek_flush = true;
-          m_chapter_seek = true;
+          // Nicola: workaround #1
+          //m_chapter_seek = true;
           printf("DEBUG: Key pressed: chapter 10 selected\n");
         }
         break;
