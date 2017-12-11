@@ -111,8 +111,8 @@ map<int, int> KeyConfig::buildDefaultKeymap()
     keymap['z'] = ACTION_SHOW_INFO;
     keymap['j'] = ACTION_PREVIOUS_AUDIO;
     keymap['k'] = ACTION_NEXT_AUDIO;
-    //keymap['i'] = ACTION_PREVIOUS_CHAPTER;
-    //keymap['o'] = ACTION_NEXT_CHAPTER;
+    keymap['i'] = ACTION_PREVIOUS_CHAPTER;
+    keymap['o'] = ACTION_NEXT_CHAPTER;
     keymap['n'] = ACTION_PREVIOUS_SUBTITLE;
     keymap['m'] = ACTION_NEXT_SUBTITLE;
     keymap['s'] = ACTION_TOGGLE_SUBTITLE;
@@ -133,6 +133,7 @@ map<int, int> KeyConfig::buildDefaultKeymap()
     keymap['w'] = ACTION_SHOW_SUBTITLES;
     keymap['x'] = ACTION_HIDE_SUBTITLES;
 
+    keymap['0'] = ACTION_CHAPTER_0;
     keymap['1'] = ACTION_CHAPTER_1;
     keymap['2'] = ACTION_CHAPTER_2;
     keymap['3'] = ACTION_CHAPTER_3;
@@ -142,7 +143,7 @@ map<int, int> KeyConfig::buildDefaultKeymap()
     keymap['7'] = ACTION_CHAPTER_7;
     keymap['8'] = ACTION_CHAPTER_8;
     keymap['9'] = ACTION_CHAPTER_9;
-    keymap['0'] = ACTION_CHAPTER_10;
+
 
     /*
     keymap['1'] = ACTION_DECREASE_SPEED;

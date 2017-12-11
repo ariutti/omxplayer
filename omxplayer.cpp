@@ -1309,8 +1309,8 @@ int main(int argc, char *argv[])
         }
         break;
 
-      // Nicola: I comment out these lines
-      /*
+      // Nicola: I decomment out these lines. Now also 'i' and 'o' will work
+
       case KeyConfig::ACTION_PREVIOUS_CHAPTER:
         if(m_omx_reader.GetChapterCount() > 0)
         {
@@ -1342,7 +1342,6 @@ int main(int argc, char *argv[])
           m_incr = 600.0;
         }
         break;
-      */
 
       case KeyConfig::ACTION_PREVIOUS_SUBTITLE:
         if(m_has_subtitle)
@@ -1659,15 +1658,15 @@ int main(int argc, char *argv[])
         }
         break;
 
-      case KeyConfig::ACTION_CHAPTER_10:
+      case KeyConfig::ACTION_CHAPTER_0:
         if(m_omx_reader.GetChapterCount() > 0)
         {
-          m_omx_reader.SeekChapter(10, &startpts);
-          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 10 ));
+          m_omx_reader.SeekChapter(0, &startpts);
+          DISPLAY_TEXT_LONG(strprintf( "Chapter %d", 0 ));
           FlushStreams(startpts);
           m_seek_flush = true;
           m_chapter_seek = true;
-          printf("DEBUG: Key pressed: chapter 10 selected\n");
+          printf("DEBUG: Key pressed: chapter 0 selected\n");
         }
         break;
 
