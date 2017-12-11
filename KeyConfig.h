@@ -43,7 +43,7 @@ class KeyConfig
         ACTION_CROP_VIDEO = 34,
         ACTION_PAUSE = 35,
         ACTION_PLAY = 36,
-        
+
         ACTION_CHAPTER_1 = 37,
         ACTION_CHAPTER_2 = 38,
         ACTION_CHAPTER_3 = 39,
@@ -53,7 +53,7 @@ class KeyConfig
         ACTION_CHAPTER_7 = 43,
         ACTION_CHAPTER_8 = 44,
         ACTION_CHAPTER_9 = 45,
-        ACTION_CHAPTER_10 = 46
+        ACTION_CHAPTER_0 = 46
 
     };
 
